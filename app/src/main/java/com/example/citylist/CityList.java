@@ -23,13 +23,46 @@ public class CityList {
     }
 
     /**
+     * This deletes a city to the list if that city does exist
+     * @param city
+     *      This is the city to delete
+     */
+    public void delete(City city) {
+        if (!cities.contains(city)) {
+            throw new IllegalArgumentException();
+        }
+        cities.remove(city);
+    }
+
+    /**
+     * This counts city from the list
+     */
+    public int count() {
+        return cities.size();
+    }
+
+
+    /**
      * This returns a sorted list of cities
      * @return
      *      Return the sorted list of cities
      */
-    public List<City> getCities() {
+    public List<City> getCities(int sort) {
+        // sort ==1 means sort by city
         List<City> cityList = cities;
-        Collections.sort(cityList);
+        if(sort==1){
+            //sort by city name
+            Collections.sort(cityList);
+        }
+        else{
+            // sort by province
+            Collections.sort(cityList,new SortByProvince());
+        }
+
+
         return cityList;
     }
+
+
 }
+
